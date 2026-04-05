@@ -1,6 +1,10 @@
 #include"man.h"
+#include <fstream>
+#include <iostream>
 int main()
-{int choice=0;
+{ std::fstream file;
+ file.open("text.text",std::ios::app);
+ int choice=0;
 int a;char b[256];char c[256];
 Student first;
 Book person_first;
@@ -12,6 +16,7 @@ cin>>mode;
 if(mode==1){
   x=1;
 while(x){
+
     cout<<"1.借阅书籍 2.个人信息 3.查看借阅数据 4.退出"<<endl;
 
     cin>>choice;
@@ -56,13 +61,14 @@ default:
 
     }}
     else if(mode==2){
+    
       x=1;
       cout<<"输入信息："<<endl<<"姓名：";
       cin>>b;
       cout<<"学号：";
       cin>>c;
       Student person(c,b);
-    
+    file<<b<<" "<<c<< std::endl;
 while(x){  cout<<"1.添加借阅信息 2.删除借阅信息 3.查看借阅信息 4.退出"<<endl;
       int person_choice=0;
       cin>>person_choice;
@@ -74,6 +80,7 @@ case 1:{cout<<"借阅数量：";
   cout<<"ISBN：";
   cin>>b;
   person_first.create(a,b,c);
+   file<<a<<" "<<c<<" "<<b<< std::endl;
 break;}
 case 2:
 {cout<<"无权限";
@@ -108,5 +115,6 @@ while(sign!=NULL)
   sign = sign -> next;
   delete(ak);
 }
+file.close();
     return 0;
 }
