@@ -3,7 +3,10 @@
 #include <iostream>
 int main()
 { std::fstream file;
- file.open("text.text",std::ios::app);
+  std::fstream k_file;
+ file.open("text.txt",std::ios::in);
+  k_file.open("text.txt",std::ios::app);
+ char line[256];
  int choice=0;
 int a;char b[256];char c[256];
 Student first;
@@ -17,21 +20,13 @@ if(mode==1){
   x=1;
 while(x){
 
-    cout<<"1.借阅书籍 2.个人信息 3.查看借阅数据 4.退出"<<endl;
+    cout<<"1.借阅书籍 2.删除借阅信息 3.查看借阅数据 4.退出"<<endl;
 
     cin>>choice;
 
     switch(choice){
 case 1:{
-cout<<"借阅的数量：";
-cin>>a;
-cout<<"借阅书籍的名称:";
-cin>>c;
-cout<<"ISBN:";
-cin>>b;
-
- person_first.create(a,b,c); 
-  person_first.display();
+cout<<"无权限";
 break;}
 case 2:{
 cout<<"添加数据";
@@ -44,10 +39,42 @@ break;
 
 }
 case 3:{
-first.Display();
-break;
-
+  int q_choice;
+  cout<<"1.查看借阅书籍的人 2.输入姓名查看具体借阅信息"<<endl;
+  cin>>q_choice;
+  switch(q_choice){
+case 1:{first.Display();
+break;}
+case 2:{
+char s[256]="0";
+cout<<"输入姓名";
+cin>>s;
+int op=0;
+while(file.getline(line,256)){
+if(op==0){
+  if(strstr(line,s)){
+op=1;
+  }
 }
+else if(op==1){
+
+cout<<line<<endl;
+if(strstr(line,"---")){
+  op=3;
+}
+}
+else if(op==3){
+  break;
+}
+
+}break;
+}
+ 
+  break;
+}
+ break;
+}
+
 case 4:{
   x=0;
   break;
@@ -59,7 +86,8 @@ default:
 }
 }
 
-    }}
+    }
+  }
     else if(mode==2){
     
       x=1;
@@ -68,7 +96,7 @@ default:
       cout<<"学号：";
       cin>>c;
       Student person(c,b);
-    file<<b<<" "<<c<< std::endl;
+    k_file<<b<<" "<<c<< std::endl;
 while(x){  cout<<"1.添加借阅信息 2.删除借阅信息 3.查看借阅信息 4.退出"<<endl;
       int person_choice=0;
       cin>>person_choice;
@@ -80,7 +108,7 @@ case 1:{cout<<"借阅数量：";
   cout<<"ISBN：";
   cin>>b;
   person_first.create(a,b,c);
-   file<<a<<" "<<c<<" "<<b<< std::endl;
+   k_file<<a<<" "<<c<<" "<<b<<std::endl;
 break;}
 case 2:
 {cout<<"无权限";
@@ -92,7 +120,9 @@ case 3:
 {person_first.display();
 break;}
 case 4:
-{x=0;break;}
+{x=0;
+   k_file<<"---";
+  break;}
 
 
 
@@ -100,7 +130,7 @@ case 4:
 }
 
     }
-
+  
   Book *p_sign=person_first.b_head;
   while(p_sign!=NULL){
 Book *ac=p_sign;
@@ -116,5 +146,6 @@ while(sign!=NULL)
   delete(ak);
 }
 file.close();
+k_file.close();
     return 0;
 }
