@@ -79,7 +79,6 @@ void display(){  Book *ll = b_head;
         
         cout<<"借阅数量:"<<ll -> num<<" "<<"书籍名称:"<<ll ->name <<"ISBN:"<<ll ->ISBN<<endl;
         ll = ll -> b_next;
-      
 
     }
 }
