@@ -78,7 +78,7 @@ case 1:{cout<<"借阅数量：";
    k_file<<a<<" "<<c<<" "<<b<<std::endl;
 break;}
 case 2:
-{cout<<"无权限";
+{cout<<"无权限"<<endl;
 break;
  }
 case 3:
