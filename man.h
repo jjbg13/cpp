@@ -95,6 +95,73 @@ else if(op==3){
 }
 file.close();
  }
+ void dele (){
+std::fstream k;
+k.open("text.txt",std::ios::in | std::ios::out);
+char lline[256];
+    char s[256];
+    char inner[256];
+    char iop[256];
+cout<<"输入姓名";
+cin>>s;
+int op=0;
+while(k.getline(lline,256)){
+if(op==0){
+  if(strstr(lline,s)){
+op=1;
+  }
+}
+else if(op==1){
+ cout<<lline<<endl;
+
+if(strstr(lline,"---")){
+  op=3;
+}
+}
+else if(op==3){
+  break;
+}
+}
+k.close();
+k.open("text.txt",std::ios::in | std::ios::out);
+std::fstream kk;
+kk.open("tcc.txt",std::ios::out);
+op=0;
+int ssk=0;
+
+cout<<"输入你要删除的记录（书名或isbn）：";
+cin>>iop;
+while(k.getline(lline,256)){
+if(op==0){
+  if(strstr(lline,s)){
+ssk=1;
+  }
+  if(strstr(lline,iop)&&ssk==1){
+    op=1;
+    ssk=0;
+    
+  }
+
+
+if(op==0){
+strcpy(inner,lline);
+kk<<inner<<endl;
+
+
+
+}
+ if(op==1){
+  op=0;
+}
+ 
+}
+}
+k.close();
+kk.close();
+remove("text.txt");
+rename("tcc.txt","text.txt");
+ }
+
  void xxx(){
    Student *sign=head;
 while(sign!=NULL)

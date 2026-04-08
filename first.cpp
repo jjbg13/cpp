@@ -21,11 +21,10 @@ while(x){
      cin>>choice;
      switch(choice){
 case 1:{
-cout<<"无权限";
+cout<<"无权限"<<endl;
 break;}
 case 2:{
- first.se();
- first.xxx();
+ first.dele();
  break;
  }
 case 3:{
